@@ -14,10 +14,10 @@
 
 struct CounterImp
 {
-  enum Directions direction;
-  int increment;
+  enum Directions type;
+  int increment_value;
   int value;
-  bool isused;
+  bool is_used;
 };
 
 struct CounterImp c1 = {UNDEFINED,0,0,false};
@@ -37,7 +37,7 @@ Counter new_counter(enum Directions direction)
     if (!counters_so_far[i]->is_used)
     {
       counters_so_far[i]->is_used=true;
-      counters_so_far[i]->type=type;
+      counters_so_far[i]->type=direction;
       return counters_so_far[i];
     }
   }
@@ -57,41 +57,41 @@ void init()
 
 void set_direction(Counter counter,enum Directions direction)
 {
-  c->type=type;
+  counter->type=direction;
 }
 
 enum Directions get_direction(Counter counter)
 {
-  return c->type;
+  return counter->type;
 }
 
 void increment(Counter counter)
 {
-  if (c->type==UP)
+  if (counter->type==UP)
   {
-    c->value+=c->increment_value;
+    counter->value+=counter->increment_value;
   }
-  else if (c->type==DOWN)
+  else if (counter->type==DOWN)
   {
-    c->value-=c->increment_value;
+    counter->value-=counter->increment_value;
   }
 }
 
 void set_increment_value(Counter counter,int value)
 {
-  if(value>=0) c->increment_value=value;
+  if(value>=0) counter->increment_value=value;
 }
 
 int get_increment_value(Counter counter)
 {
-  return c->increment_value;
+  return counter->increment_value;
 }
 
 bool set_value(Counter counter,int value)
 {
-  if (c->type==DOWN)
+  if (counter->type==DOWN)
   {
-    c->value=value;
+    counter->value=value;
       return true;
   }
   return false;
@@ -99,5 +99,5 @@ bool set_value(Counter counter,int value)
 
 int get_value(Counter counter)
 {
-  return c->value;
+  return counter->value;
 }
